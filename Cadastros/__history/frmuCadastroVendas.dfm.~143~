@@ -1,0 +1,854 @@
+inherited frCadastroPedidos: TfrCadastroPedidos
+  Caption = 'Cadastro Pedido'
+  ClientHeight = 510
+  ClientWidth = 1147
+  ExplicitWidth = 1163
+  ExplicitHeight = 549
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pgCadastro: TPageControl
+    Width = 1147
+    Height = 510
+    ActivePage = tsConsulta
+    ExplicitWidth = 1147
+    ExplicitHeight = 510
+    inherited tsCadastro: TTabSheet
+      ExplicitWidth = 1139
+      ExplicitHeight = 482
+      inherited pnTopoCadastro: TPanel
+        Width = 1139
+        ExplicitWidth = 1139
+        inherited dbtTitulo: TDBText
+          Left = 93
+          Width = 74
+          Height = 23
+          DataField = 'IDPEDIDO'
+          DataSource = dsCadastro
+          Font.Height = -19
+          ParentFont = False
+          ExplicitLeft = 93
+          ExplicitWidth = 74
+          ExplicitHeight = 23
+        end
+        object lbValorPedido: TLabel
+          Left = 600
+          Top = 9
+          Width = 189
+          Height = 23
+          Caption = 'Valor Total Pedido :'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lbPedido: TLabel
+          Left = 6
+          Top = 5
+          Width = 78
+          Height = 23
+          Caption = 'Pedido :'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object edValorPedido: TDBText
+          Left = 797
+          Top = 8
+          Width = 119
+          Height = 23
+          AutoSize = True
+          DataField = 'TOTALPEDIDO'
+          DataSource = dsCadastro
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object lbEmissao: TLabel
+          Left = 938
+          Top = 9
+          Width = 92
+          Height = 23
+          Caption = 'Emiss'#227'o :'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object dbtEmissao: TDBText
+          Left = 1036
+          Top = 10
+          Width = 95
+          Height = 23
+          AutoSize = True
+          DataField = 'DATAEMISSAO'
+          DataSource = dsCadastro
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -19
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+      end
+      inherited gbTelaCadastro: TGroupBox
+        Width = 1139
+        Height = 422
+        ExplicitWidth = 1139
+        ExplicitHeight = 422
+        inherited gbBotoes: TGroupBox
+          Left = 1030
+          Top = 117
+          Height = 303
+          ExplicitLeft = 1030
+          ExplicitTop = 117
+          ExplicitHeight = 303
+        end
+        object gbParcelas: TGroupBox
+          Left = 669
+          Top = 117
+          Width = 361
+          Height = 303
+          Align = alRight
+          Caption = 'Parcelas'
+          TabOrder = 1
+          object GroupBox4: TGroupBox
+            Left = 301
+            Top = 15
+            Width = 58
+            Height = 286
+            Align = alRight
+            Caption = 'Adicionar'
+            TabOrder = 0
+            object sbInsereParcelaPedido: TSpeedButton
+              Left = 2
+              Top = 15
+              Width = 54
+              Height = 42
+              Hint = 'Cliqu para inserir uma parcelala'
+              Align = alTop
+              Caption = '+'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -19
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              OnClick = sbInsereParcelaPedidoClick
+              ExplicitLeft = 1
+            end
+            object sbRemoveParcelaPedido: TSpeedButton
+              Left = 2
+              Top = 243
+              Width = 54
+              Height = 41
+              Hint = 'Clique para removeruma parcela'
+              Align = alBottom
+              Caption = '-'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -19
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+              OnClick = sbRemoveParcelaPedidoClick
+              ExplicitTop = 248
+              ExplicitWidth = 42
+            end
+          end
+          object gdParcelas: TDBGrid
+            Left = 2
+            Top = 15
+            Width = 299
+            Height = 286
+            Align = alClient
+            DataSource = dsParcelas
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            ReadOnly = True
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = []
+            OnDblClick = gdParcelasDblClick
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'NUMEROPARCELA'
+                Title.Caption = 'n'#186
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FORMAPAGAMENTO'
+                Title.Caption = 'Forma'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DATAVENCIMENTO'
+                Title.Caption = 'Vencimento'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VALORPARCELA'
+                Title.Caption = 'Valor'
+                Visible = True
+              end>
+          end
+          object gbAddParcelas: TGroupBox
+            Left = 15
+            Top = 56
+            Width = 273
+            Height = 233
+            Caption = 'Adiciona Parcelas'
+            Color = clMedGray
+            ParentBackground = False
+            ParentColor = False
+            TabOrder = 2
+            Visible = False
+            object lbFormaPagamento: TLabel
+              Left = 16
+              Top = 17
+              Width = 116
+              Height = 16
+              Caption = 'Forma Pagamento'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object cbVencimento: TLabel
+              Left = 16
+              Top = 63
+              Width = 76
+              Height = 16
+              Caption = 'Vencimento'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lbValorRestante: TLabel
+              Left = 162
+              Top = 14
+              Width = 98
+              Height = 16
+              Caption = 'Valor Restante'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lbDescricaoValorRestante: TLabel
+              Left = 184
+              Top = 36
+              Width = 8
+              Height = 16
+              Caption = '0'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Tahoma'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object cbFormaPagamento: TComboBox
+              Left = 16
+              Top = 36
+              Width = 145
+              Height = 21
+              Style = csDropDownList
+              ItemIndex = 0
+              TabOrder = 0
+              Text = 'A Vista'
+              Items.Strings = (
+                'A Vista'
+                'A Prazo')
+            end
+            object dtpVencimentoParcela: TDateTimePicker
+              Left = 16
+              Top = 81
+              Width = 186
+              Height = 21
+              Date = 44074.000000000000000000
+              Time = 0.636039861114113600
+              TabOrder = 1
+            end
+            object edValorParcela: TLabeledEdit
+              Left = 16
+              Top = 123
+              Width = 121
+              Height = 21
+              EditLabel.Width = 34
+              EditLabel.Height = 16
+              EditLabel.Caption = 'Valor'
+              EditLabel.Font.Charset = DEFAULT_CHARSET
+              EditLabel.Font.Color = clWindowText
+              EditLabel.Font.Height = -13
+              EditLabel.Font.Name = 'Tahoma'
+              EditLabel.Font.Style = [fsBold]
+              EditLabel.ParentFont = False
+              TabOrder = 2
+              Text = '0'
+            end
+            object btGravarParcelaPedido: TButton
+              Left = 72
+              Top = 160
+              Width = 113
+              Height = 25
+              Caption = 'Gravar Parcela'
+              TabOrder = 3
+              OnClick = btGravarParcelaPedidoClick
+            end
+            object btCancelarParcela: TButton
+              Left = 72
+              Top = 191
+              Width = 113
+              Height = 25
+              Caption = 'Cancelar'
+              TabOrder = 4
+              OnClick = btCancelarParcelaClick
+            end
+          end
+        end
+        object gbItensPedido: TGroupBox
+          Left = 2
+          Top = 117
+          Width = 667
+          Height = 303
+          Align = alClient
+          Caption = 'ItensPedido'
+          TabOrder = 2
+          object GroupBox2: TGroupBox
+            Left = 2
+            Top = 15
+            Width = 663
+            Height = 286
+            Align = alClient
+            Caption = 'Itens Adicionados ao pedido'
+            TabOrder = 0
+            object GroupBox3: TGroupBox
+              Left = 597
+              Top = 15
+              Width = 64
+              Height = 269
+              Align = alRight
+              Caption = 'Adicionar'
+              TabOrder = 0
+              object sbInsereProdutoPedido: TSpeedButton
+                Left = 2
+                Top = 15
+                Width = 60
+                Height = 66
+                Hint = 'Clique para inserir um novo produto'
+                Align = alTop
+                Caption = '+'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -19
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+                OnClick = sbInsereProdutoPedidoClick
+                ExplicitWidth = 94
+              end
+              object sbRemoveProdutoPedido: TSpeedButton
+                Left = 2
+                Top = 203
+                Width = 60
+                Height = 64
+                Hint = 'Clique para remover um produto'
+                Align = alBottom
+                Caption = '-'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -19
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+                OnClick = sbRemoveProdutoPedidoClick
+                ExplicitTop = 244
+                ExplicitWidth = 94
+              end
+            end
+            object gdItensPedidos: TDBGrid
+              Left = 2
+              Top = 15
+              Width = 595
+              Height = 269
+              Align = alClient
+              DataSource = dsItensPedido
+              Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+              ReadOnly = True
+              TabOrder = 1
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              OnDblClick = gdItensPedidosDblClick
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'NUMEROITEMPEDIDO'
+                  Title.Caption = 'n'#186
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'IDPRODUTOITEMPEDIDO'
+                  Title.Caption = 'Codigo'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'DESCRICAOPRODUTO'
+                  Title.Caption = 'Descri'#231#227'o'
+                  Width = 200
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'QUANTIDADEITEMPEDIDO'
+                  Title.Caption = 'Qtde'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'VALORUNITARIOITEMPEDIDO'
+                  Title.Caption = 'Valor Unit'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'VALORTOTALITEMPEDIDO'
+                  Title.Caption = 'Valor Total'
+                  Visible = True
+                end>
+            end
+            object gbAddProdutos: TGroupBox
+              Left = 47
+              Top = 72
+              Width = 528
+              Height = 193
+              Caption = 'Adiciona Produtos'
+              Color = clActiveBorder
+              ParentBackground = False
+              ParentColor = False
+              TabOrder = 2
+              Visible = False
+              object Label2: TLabel
+                Left = 19
+                Top = 13
+                Width = 43
+                Height = 16
+                Caption = 'Codigo'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+              end
+              object Label3: TLabel
+                Left = 91
+                Top = 13
+                Width = 63
+                Height = 16
+                Caption = 'Descricao'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+              end
+              object Valor: TLabel
+                Left = 445
+                Top = 13
+                Width = 34
+                Height = 16
+                Caption = 'Valor'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+              end
+              object Quantidade: TLabel
+                Left = 16
+                Top = 56
+                Width = 74
+                Height = 16
+                Caption = 'Quantidade'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+              end
+              object lbValorTotalItem: TLabel
+                Left = 169
+                Top = 56
+                Width = 104
+                Height = 16
+                Caption = 'Valor Total Item'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+              end
+              object lbDescricaoValorTotalItem: TLabel
+                Left = 171
+                Top = 78
+                Width = 28
+                Height = 16
+                Caption = '0.00'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+              end
+              object sbBuscarProdutoPedido: TSpeedButton
+                Left = 385
+                Top = 24
+                Width = 56
+                Height = 30
+                Caption = 'Buscar'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+                OnClick = sbBuscarProdutoPedidoClick
+              end
+              object cbDescricaoProduto: TDBLookupComboBox
+                Left = 86
+                Top = 29
+                Width = 299
+                Height = 21
+                KeyField = 'IDPRODUTO'
+                ListField = 'DESCRICAOPRODUTO'
+                ListSource = dsRelProdutos
+                TabOrder = 0
+                OnCloseUp = cbDescricaoProdutoCloseUp
+                OnKeyDown = cbDescricaoProdutoKeyDown
+              end
+              object edValorProduto: TDBEdit
+                Left = 441
+                Top = 29
+                Width = 78
+                Height = 21
+                DataField = 'VALORPRODUTO'
+                DataSource = dsRelProdutos
+                Enabled = False
+                ReadOnly = True
+                TabOrder = 1
+              end
+              object cbCodigoProduto: TDBLookupComboBox
+                Left = 16
+                Top = 29
+                Width = 65
+                Height = 21
+                KeyField = 'IDPRODUTO'
+                ListField = 'IDPRODUTO'
+                ListSource = dsRelProdutos
+                TabOrder = 2
+                OnCloseUp = cbCodigoProdutoCloseUp
+                OnKeyDown = cbCodigoProdutoKeyDown
+              end
+              object edQtdeItemPedido: TEdit
+                Left = 16
+                Top = 77
+                Width = 121
+                Height = 21
+                TabOrder = 3
+                Text = '1'
+                OnEnter = edQtdeItemPedidoEnter
+                OnExit = edQtdeItemPedidoExit
+                OnKeyPress = edQtdeItemPedidoKeyPress
+              end
+              object btGravarItemPedido: TButton
+                Left = 168
+                Top = 112
+                Width = 75
+                Height = 25
+                Caption = 'Gravar Item'
+                TabOrder = 4
+                OnClick = btGravarItemPedidoClick
+              end
+              object btCancelarItem: TButton
+                Left = 168
+                Top = 143
+                Width = 75
+                Height = 25
+                Caption = 'Cancelar'
+                TabOrder = 5
+                OnClick = btCancelarItemClick
+              end
+            end
+          end
+        end
+        object gbSelecionaCliente: TGroupBox
+          Left = 2
+          Top = 15
+          Width = 1135
+          Height = 102
+          Align = alTop
+          Caption = 'Sele'#231#227'o Cliente'
+          TabOrder = 3
+          object lbSelecionaCliente: TLabel
+            Left = 16
+            Top = 15
+            Width = 44
+            Height = 16
+            Caption = 'Cliente'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lbReferencia: TLabel
+            Left = 16
+            Top = 59
+            Width = 70
+            Height = 16
+            Caption = 'Referencia'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object lbTipoOperacao: TLabel
+            Left = 509
+            Top = 15
+            Width = 92
+            Height = 16
+            Caption = 'Tipo Opera'#231#227'o'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label1: TLabel
+            Left = 175
+            Top = 59
+            Width = 62
+            Height = 16
+            Caption = 'N'#186' Pedido'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object cbListaClientes: TDBLookupComboBox
+            Left = 14
+            Top = 34
+            Width = 419
+            Height = 21
+            DataField = 'IDCliente'
+            DataSource = dsCadastro
+            KeyField = 'IDCLIENTE'
+            ListField = 'NOMECLIENTE'
+            ListSource = dsRelClientes
+            TabOrder = 0
+          end
+          object dbReferencia: TDBEdit
+            Left = 16
+            Top = 75
+            Width = 153
+            Height = 21
+            DataField = 'REFERENCIA'
+            DataSource = dsCadastro
+            TabOrder = 1
+          end
+          object cbTipoOperacao: TComboBox
+            Left = 507
+            Top = 34
+            Width = 145
+            Height = 21
+            Style = csDropDownList
+            ItemIndex = 1
+            TabOrder = 2
+            Text = 'Saida'
+            Items.Strings = (
+              'Entrada'
+              'Saida')
+          end
+          object edNumeroPedido: TDBEdit
+            Left = 175
+            Top = 75
+            Width = 153
+            Height = 21
+            DataField = 'NPEDIDO'
+            DataSource = dsCadastro
+            TabOrder = 3
+          end
+        end
+      end
+      inherited sbRodapeCadastro: TStatusBar
+        Top = 463
+        Width = 1139
+        Panels = <
+          item
+            Text = 'Valor Total Pedido :'
+            Width = 150
+          end
+          item
+            Width = 100
+          end
+          item
+            Width = 50
+          end>
+        ExplicitTop = 463
+        ExplicitWidth = 1139
+      end
+    end
+    inherited tsConsulta: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
+      ExplicitWidth = 1139
+      ExplicitHeight = 482
+      inherited pnTitulo: TPanel
+        Width = 1139
+        Height = 50
+        ExplicitWidth = 1139
+        ExplicitHeight = 50
+        object edBuscaNumeroPedido: TLabeledEdit
+          Left = 8
+          Top = 19
+          Width = 121
+          Height = 21
+          EditLabel.Width = 32
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Pedido'
+          NumbersOnly = True
+          TabOrder = 0
+          OnChange = edBuscaNumeroPedidoChange
+        end
+      end
+      inherited gbConsulta: TGroupBox
+        Top = 50
+        Width = 1139
+        Height = 413
+        ExplicitTop = 50
+        ExplicitWidth = 1139
+        ExplicitHeight = 413
+        inherited dbgListaCadastros: TDBGrid
+          Width = 1135
+          Height = 396
+          DataSource = dsConsulta
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          OnDblClick = dbgListaCadastrosDblClick
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'IDPEDIDO'
+              Title.Caption = 'Pedido'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NPEDIDO'
+              Title.Caption = 'n'#186' Pedido'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATAEMISSAO'
+              Title.Caption = 'Data Emiss'#227'o'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMECLIENTE'
+              Title.Caption = 'Cliente'
+              Width = 500
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TIPOOPERACAO'
+              Title.Caption = 'Opera'#231#227'o'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TOTALPEDIDO'
+              Title.Caption = 'Total'
+              Visible = True
+            end>
+        end
+      end
+      inherited StatusBar1: TStatusBar
+        Top = 463
+        Width = 1139
+        ExplicitTop = 463
+        ExplicitWidth = 1139
+      end
+    end
+  end
+  inherited dsCadastro: TDataSource
+    DataSet = dmPedido.qryPedidos
+    Left = 892
+    Top = 353
+  end
+  inherited dsConsulta: TDataSource
+    DataSet = dmPedido.qryRelPedidos
+    Left = 892
+    Top = 409
+  end
+  object dsRelClientes: TDataSource
+    DataSet = dmPedido.qryRelClientes
+    Left = 372
+    Top = 71
+  end
+  object dsItensPedido: TDataSource
+    DataSet = dmPedido.qryRelItensPedido
+    Left = 248
+    Top = 174
+  end
+  object dsParcelas: TDataSource
+    DataSet = dmPedido.qryRelParcelas
+    Left = 588
+    Top = 263
+  end
+  object dsRelProdutos: TDataSource
+    DataSet = dmPedido.qryRelProdutos
+    Left = 60
+    Top = 391
+  end
+end

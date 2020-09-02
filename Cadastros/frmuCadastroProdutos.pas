@@ -1,0 +1,141 @@
+unit frmuCadastroProdutos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, frmCadastroPadrao, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.ExtCtrls, Vcl.Mask;
+
+type
+  TfrCadastroProdutos = class(TfrCadastroPadrao)
+    GroupBox1: TGroupBox;
+    edDescricao: TDBEdit;
+    edValor: TDBEdit;
+    lbDescricao: TLabel;
+    lbValor: TLabel;
+    edBuscaCodigoProduto: TLabeledEdit;
+    edBuscaDescricaoProduto: TLabeledEdit;
+    dbtCodigoProduto: TDBText;
+    lbCodigoProduto: TLabel;
+    procedure dbgListaCadastrosDblClick(Sender: TObject);
+    procedure btNovoClick(Sender: TObject);
+    procedure btAlterarClick(Sender: TObject);
+    procedure edBuscaCodigoProdutoChange(Sender: TObject);
+    procedure edBuscaDescricaoProdutoChange(Sender: TObject);
+    function F_VerificaPreenchimentoProduto : Boolean;
+    procedure btGravarClick(Sender: TObject);
+    procedure edDescricaoEnter(Sender: TObject);
+    procedure edValorEnter(Sender: TObject);
+    procedure edValorExit(Sender: TObject);
+    procedure edDescricaoExit(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frCadastroProdutos: TfrCadastroProdutos;
+
+implementation
+
+{$R *.dfm}
+
+uses udmuProdutos, UProcedures;
+
+procedure TfrCadastroProdutos.btAlterarClick(Sender: TObject);
+begin
+  inherited;
+  edDescricao.SetFocus;
+end;
+
+procedure TfrCadastroProdutos.btGravarClick(Sender: TObject);
+begin
+  if F_VerificaPreenchimentoProduto = False then
+    inherited;
+end;
+
+procedure TfrCadastroProdutos.btNovoClick(Sender: TObject);
+begin
+  try
+  inherited;
+  finally
+    edDescricao.SetFocus;
+  end;
+
+end;
+
+procedure TfrCadastroProdutos.dbgListaCadastrosDblClick(Sender: TObject);
+var
+  Sql : string;
+begin
+  Sql :=
+    'select ' +#13+
+    '  First 1    ' +#13+
+    '  IDProduto, ' +#13+
+    '  DescricaoProduto, ' +#13+
+    '  ValorProduto  '  +#13+
+    'from  ' +#13+
+    '  Produto ' ;
+  P_EncontraRegistroEdicao(Sql,dsConsulta.DataSet.FieldByName('IDProduto').AsInteger,'IDProduto',dmProdutos.qryProdutos);
+  tsCadastro.Show;
+end;
+
+procedure TfrCadastroProdutos.edBuscaCodigoProdutoChange(Sender: TObject);
+begin
+  if edBuscaCodigoProduto.Text <> '' then
+  begin
+    dmProdutos.P_ConsultaProdutos(dmProdutos.qryRelProdutos,'IDProduto',edBuscaCodigoProduto.Text,'')
+  end;
+end;
+
+procedure TfrCadastroProdutos.edBuscaDescricaoProdutoChange(Sender: TObject);
+begin
+  dmProdutos.P_ConsultaProdutos(dmProdutos.qryRelProdutos,'DESCRICAOPRODUTO',edBuscaDescricaoProduto.Text,'Sim');
+end;
+
+procedure TfrCadastroProdutos.edDescricaoEnter(Sender: TObject);
+begin
+  inherited;
+  edDescricao.Color := clWindow;
+end;
+
+procedure TfrCadastroProdutos.edDescricaoExit(Sender: TObject);
+begin
+  inherited;
+  edDescricao.Color := clWindow;
+end;
+
+procedure TfrCadastroProdutos.edValorEnter(Sender: TObject);
+begin
+  inherited;
+  edValor.Color := clWindow;
+end;
+
+procedure TfrCadastroProdutos.edValorExit(Sender: TObject);
+begin
+  inherited;
+  edValor.Color := clWindow;
+end;
+
+function TfrCadastroProdutos.F_VerificaPreenchimentoProduto : Boolean;
+begin
+  Result := False;
+  if edDescricao.Text = '' then
+  begin
+    ShowMessage('Verique o Preenchimento das descrição');
+    edDescricao.SetFocus;
+    edDescricao.Color := clRed;
+    Result := True;
+  end
+  else if edValor.Text = '' then
+  begin
+    ShowMessage('Verique o Preenchimento do Valor');
+    edValor.SetFocus;
+    edValor.Color := clRed;
+    Result := True;
+  end;
+end;
+
+end.
